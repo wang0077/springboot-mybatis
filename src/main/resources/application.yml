@@ -1,0 +1,51 @@
+debug: false
+spring:
+  servlet:
+    multipart:
+      #      是否开启文件上传支持
+      enabled: true
+      #      文件写入磁盘阈值
+      file-size-threshold: 0
+      #      文件上传临时保存位置
+      location: temp
+      #      单个文件上传的最大大小
+      max-file-size: 100MB
+      #      多个文件上传的最大大小
+      max-request-size: 1000MB
+      #      文件是否延迟解析
+      resolve-lazily: false
+
+  datasource:
+    username: root
+    password: 228913
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,slf4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  #    schema:
+  #      - classpath:username.sql
+  #    initialization-mode: always
+  thymeleaf:
+    cache: false
+    mode: HTML5
+#  resources:
+#    static-locations: /static/**
+management:
+  endpoint:
+    shutdown:
+      enabled: false
